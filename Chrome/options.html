@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Joe Cloudwalker's SpeedCalling for Popmundo</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/about.css" />	
+	</head>
+	<body>
+		<div class="header">
+			<p>This extention was created as an addon to the <a href="http://popmundo.com" target="_BLANK">Popmundo</a> roleplaying game by <a href="http://www.popmundo.com/World/Popmundo.aspx/Character/3248185" target="_BLANK">Joe Cloudwalker</a> and is not affiliated with, sponsored by, or endorsed by <em>Spelkultur i Sverige AB</em> in any way. Any problems, please contact <a href="http://www.popmundo.com/World/Popmundo.aspx/Character/3248185" target="_BLANK">the developer</a> in game.</p>
+		</div>
+		<div class="content">
+			<h1>Extension options</h1>
+			<ul>
+				<li>
+					<h3>Item Offers</h3>
+					<label>
+						<input type="checkbox" id="ckbDeliveryCharges">
+						Enable "<em>Pay delivery charges, if any</em>" by default.
+					</label>
+					<p>If enabled, this option will make you pay for the delivery of items, preventing undeliverable items because the other person is not in the same place as you.</p>
+				</li>
+				<li>
+					<h3>SpeedCalling</h3>
+					<label>
+						<input type="checkbox" id="ckbSpeedCalling">
+						Enables the <em>SpeedCalling</em> feature.
+					</label>
+					<p>Enables the <em>SpeedCalling</em> feature, which allows you to call all your friends in your address book automatically with a single click.</p>
+					<label>
+						<input type="checkbox" id="ckbGossip">
+						Uses <em>Gossip on the phone</em> as default option instead <em>Wazzup call</em>.
+					</label>
+					<p>If enabled, this option will use <em>Gossip on the phone</em> as the default option in <em>SpeedCalling</em> instead <em>Wazzup call</em>.</p>
+				</li>
+				<li>
+					<h3>Recipes</h3>
+					<label>
+						<input type="checkbox" id="ckbFoldRecipes">
+						Enables the <em>Fold groups</em> on the recipes page.
+					</label>
+					<p>If enabled, this option will add two buttons to your <em>recipes page</em> allowing you to fold the groups of recipes, improving readability.</p>
+				</li>
+				<li>
+					<h3>Global Average Fame</h3>
+					<label>
+						<input type="checkbox" id="ckbGlobalFame">
+						Enables the <em>Global Average Fame</em> feature.
+					</label>
+					<p>If enabled, this option will add to your artist's <em>Popularity page</em> the average global fame and popularity.</p>
+
+				</li>		
+				<li>
+					<h3>Suggested Ticket Prices</h3>
+					<label>
+						<input type="checkbox" id="ckbTicketPrice">
+						Enabled the <em>Suggested Ticket Prices</em> feature.
+					</label>
+					<p>If enabled, this option will show the suggested price for tickets according to your artist's fame in a given city.</p>					
+				</li>
+				<li>
+					<input type="checkbox" id="ckbHigherPrices">
+					Use <em>higher price set</em> for suggested Ticket Prices.
+				</li>
+
+				<li>
+					<h3>Quality to Value</h3>
+					<label>
+						<input type="checkbox" id="ckbQualityValueNumbers">
+						Enables <em>number display</em> with nominal qualities.
+					</label>
+					<p>If enabled, will display numbers along with nominal qualities.</p>
+					<label>
+						<input type="checkbox" id="ckbQualityValuePercentages">
+						Enables <em>percentage display</em> in progress bars.
+					</label>		
+					<p>If enabled, will display numbers along with progress bars.</p>
+				</li>
+			<li>
+					<h3>Filter items</h3>
+					<label>
+						<input type="checkbox" id="ckbFilterItems">
+						Enables the <em>filter items</em> in locale feature.
+					</label>
+					<p>If enabled, will add an option in your locale pages to filter items by a character ID.</p>
+			</li>
+			</ul>	
+			<button id="save">Save</button><span id="status" style="visibility: hidden;"> Options saved.</span>
+		</div>
+		<script src="/js/action/options.js"></script>
+	</body>
+</html>
+
+
+

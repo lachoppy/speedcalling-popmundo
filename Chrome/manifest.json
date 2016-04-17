@@ -1,0 +1,63 @@
+{
+	"manifest_version": 2,
+	"name": "Joe Cloudwalker's SpeedCalling for Popmundo",
+	"description": "Call all your Popmundo friends with a single mouse click.",
+	"author": "Joe Couldwalker ( http://popmundo.com/World/Popmundo.aspx/Character/3248185)",
+	"version": "0.1",
+	"default_locale": "en",
+	"options_page": "options.html",
+	"browser_action": {
+		"default_icon": "img/16.png",
+		"default_title": "SpeedCalling for Popmundo",
+		"default_popup": "popup.html"
+	},
+	"icons": {
+		"16": "img/16.png",
+		"48": "img/48.png",
+		"128": "img/128.png"
+	},
+	"permissions": [
+		"*://popmundo.com/*",
+		"*://*.popmundo.com/*",
+		"activeTab",
+		"tabs",
+		"storage",
+		"cookies"
+	],
+	"background": {
+		"scripts": [
+			"js/global/background.js"
+		]
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://popmundo.com/*",
+				"*://*.popmundo.com/*"
+			],
+			"js": [
+				"js/library/jquery.js",
+				"js/global/speedcalling.js",
+				"js/global/persistent.js",
+				"js/web/payDeliveryCharges.js",
+				"js/web/suggestedTicketPrices.js",
+				"js/web/globalAverageFame.js",
+				"js/web/foldRecipeGroups.js",
+				"js/web/addressBook.js",
+				"js/web/addressPage.js",
+				"js/web/addFilterLocaleItems.js",
+				"js/web/filterLocaleItems.js",
+				"js/web/valueToQuality.js",
+				"js/web/valueToProgressbar.js"
+			],
+			"css": [
+				"css/speedCalling.css"
+			]
+		}
+	],
+	"web_accessible_resources": [
+		"img/*",
+		"js/global/speedcalling.js",
+		"src/opt/options.html"
+	]
+}

@@ -1,0 +1,74 @@
+{
+	"l10nFRunCheck": {
+		"message": "Hide Group",
+		"description": "Folder recipes: Hide group button"
+	},
+	"l10nFRCheck": {
+		"message": "Show Group",
+		"description": "Folder recipes: Show group button"
+	},
+	"l10nAFGlobal": {
+		"message": "Global",
+		"description": "Average fame: Global"
+	},	
+	"l10nSPCallButton": {
+		"message": "Call everyone",
+		"description": "Speed Caling: call everyone button"
+	},
+	"l10nSPReportBugs": {
+		"message": "Joe Cloudwalker's SpeedCalling for Popmundo",
+		"description": "Speed Caling: report bugs link"
+	},
+	"l10nSPcall_everyone": {
+		"message": "Call everyone",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP9999": {
+		"message": "Dont Call",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP121": {
+		"message": "Gossip on the phone",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP24": {
+		"message": "Wazzup call",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP61": {
+		"message": "SMS friendly text",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP58": {
+		"message": "SMS funny pic",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP26": {
+		"message": "Prank call",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP25": {
+		"message": "Lover call",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP73": {
+		"message": "Flirty Phone call",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nSP74": {
+		"message": "Flirty SMS",
+		"description": "Speed Caling: Option value"
+	},
+	"l10nFIFilterItems":{
+		"message": "Filter Items",
+		"description": "Filter Items: header"
+	},
+	"l10nFIFilter":{
+		"message": "Filter",
+		"description": "Filter Items: button text"
+	},
+	"l10nFIPlaceHolder":{
+		"message": "Character ID",
+		"description": "Filter Items: placeholder for text"
+	}	
+}

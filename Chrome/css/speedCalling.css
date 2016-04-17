@@ -1,0 +1,193 @@
+div.spcBox{
+	/* box shadow */
+	box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+	-moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+
+	/* Background image */
+	background-repeat: no-repeat;
+	background-position: 5px center;
+
+	/* Font format */
+	font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 10px;	
+
+	/* Other settings*/
+	max-height:16px;
+	min-height: 14px;
+	display: inline-block;
+	position: relative;
+	padding: 0px;
+	margin: 0px 5px 0px 5px;
+	vertical-align: bottom;
+}
+
+div.spcBox p{
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+div.spcBox-button--big{
+	min-width: 150px;
+	cursor: pointer;
+	background-color: #ffffff;	
+}
+
+div.spcBox-button--big p{
+	width: 100px;
+}
+
+div.spcBox-button--big:hover{
+	background-color: #e6e6e6;
+}
+
+div.spcBox-button--small{
+	min-width: 25px;
+	cursor: pointer;
+	background-color: #ffffff;	
+}
+
+div.spcBox-button--small:hover{
+	background-color: #d5d6d4;
+}
+
+div.spcBox-value--money{
+	min-width: 30px;
+	cursor: default;
+	color: white;
+	background-color: #b1cca9;	
+}
+
+div.spcBox-value--dark-red{
+	min-width: 30px;
+	cursor: default;
+	color: red;
+	background-color: #e0929f;  
+}
+
+div.spcBox-value--light-red{
+	min-width: 30px;
+	cursor: default;
+	color: red;
+	background-color: #ebccd1;
+}
+
+div.spcBox-value--light-yellow{
+	min-width: 30px;
+	cursor: default;
+	color: #73731d;
+	background-color: #f5f5c4;  
+}
+
+div.spcBox-value--dark-yellow{
+	min-width: 30px;
+	cursor: default;
+	color: #73731d;
+	background-color: #d9d99e;  
+}
+
+div.spcBox-value--light-green{
+	min-width: 30px;
+	cursor: default;
+	color: green;
+	background-color: #deebda;  
+}
+
+div.spcBox-value--dark-green{
+	min-width: 30px;
+	cursor: default;
+	color: green;
+	background-color: #b1cca9;  
+}
+
+div.spcBox-value--full{
+	min-width: 30px;
+	cursor: default;
+	color: green;
+	background-color: #d1c203;  	
+	
+}
+
+div.spcBox-value--white{
+	min-width: 30px;
+	cursor: default;
+	color: black;
+	background-color: #ffffff;  
+}
+
+div.spcBox-value--white-medium{
+	min-width: 60px;
+	cursor: default;
+	color: black;
+	background-color: #ffffff;  
+}
+
+a.CallEveryone:link, a.CallEveryone:visited, a.CallEveryone:active {
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none;
+	color: darkolivegreen;
+	padding-left: 10px;
+}
+
+a.CallEveryone:hover {
+	text-decoration: underline;
+}
+
+select.CallEveryone{
+	cursor: pointer;
+	display:block;
+}
+
+div.scProgressBar{
+	text-align: center;
+	font-weight: bolder;
+	font-size: smaller;
+}
+
+
+
+
+
+
+
+
+
+th.header a{
+	vertical-align: top;
+}
+
+td.btnCallEveryone{
+	vertical-align: middle;
+}
+
+
+
+
+
+body.SpeedCalling{
+	background-image: url( "http://i.imgur.com/CoW4C8Z.png" );
+	background-repeat: no-repeat;
+	background-position: top left;
+	width: 500px;
+	max-width: 500px;	
+	min-height: 500px;	
+}
+
+table.SpeedCalling{
+	margin-top: 100px;
+	visibility: hidden;
+}
+
+
+
+td.scGlobalFame{
+	font-weight: 400;
+}

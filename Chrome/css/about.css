@@ -1,0 +1,66 @@
+body{
+	background-image: url( "/img/background.png" );
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-color: white;
+	text-align: justify;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 14px;
+	width: 800px;
+}
+
+div.header{
+	margin: 220px 0 50px 200px;
+}
+
+div.content{
+	padding-left: 25px;
+}
+
+div.content li{
+	line-height: 20px;
+}
+
+div.content li p{
+	margin: 0 0 10px 0;
+	font-size: 12px;
+}
+
+div.content label{
+	margin-bottom: 0;
+}
+
+div.content h1, div.content h2, div.content h3{
+	color: #ff4f2c;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-style: italic;
+	font-weight: 400px;
+	margin-bottom: 0;
+}
+
+h1{
+	font-size: 18pt;
+}
+
+h2{
+	font-size: 14pt;
+}
+
+h3{
+	font-size: 12pt;
+}
+
+
+p{
+	text-align: justify;
+}
+a:link, a:visited, a:active {
+	font-style: normal;
+	font-weight: normal;
+	font-style: italic;
+	text-decoration: none;
+	color: #ff876f;
+}
+a:hover {
+	text-decoration: underline;	
+}
