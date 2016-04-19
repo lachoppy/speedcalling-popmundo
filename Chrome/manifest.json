@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Joe Cloudwalker's SpeedCalling for Popmundo",
+	"name": "SpeedCalling for Popmundo",
 	"short_name": "SpeedCalling for Popmundo",
 	"description": "Call all your Popmundo friends with a single mouse click.",
 	"author": "Joe Couldwalker ( http://popmundo.com/World/Popmundo.aspx/Character/3248185)",
-	"version": "0.1",
+	"version": "0.3",
 	"default_locale": "en",
 	"options_page": "options.html",
 	"browser_action": {
@@ -39,6 +39,7 @@
 			"js": [
 				"js/library/jquery.js",
 				"js/global/speedcalling.js",
+				"js/global/createObjects.js",
 				"js/global/persistent.js",
 				"js/web/payDeliveryCharges.js",
 				"js/web/suggestedTicketPrices.js",
@@ -49,16 +50,19 @@
 				"js/web/addFilterLocaleItems.js",
 				"js/web/filterLocaleItems.js",
 				"js/web/valueToQuality.js",
-				"js/web/valueToProgressbar.js"
+				"js/web/valueToProgressbar.js",
+				"js/web/smallTweaks.js"
 			],
 			"css": [
-				"css/speedCalling.css"
+				"css/speedCalling.css",
+				"css/colorChart.css"
 			]
 		}
 	],
 	"web_accessible_resources": [
 		"img/*",
 		"js/global/speedcalling.js",
+		"js/global/createObjects.js",
 		"src/opt/options.html"
 	]
 }

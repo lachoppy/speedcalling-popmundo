@@ -17,7 +17,7 @@ function execValueToQuality() {
 		$( "a[href*='Scoring']" ).each( function() {
 			value = $( this ).attr( 'title' );
 			value = value.substr( 0, value.lastIndexOf( "/" ) );
-			$( this ).after( getValuePill( value, 3 ) );
+			$( this ).after( getObjPill( value, 4 ) );
 		} );
 
 		if( !canUse )

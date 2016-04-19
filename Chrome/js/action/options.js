@@ -10,10 +10,14 @@ function classOptions() {
 	this.GlobalFame = true;
 	this.TicketPrice = true;
 	this.HigherPrices = false;
+	this.useHighColors = false;
 	this.ShowValues = true;
 	this.ShowPercentages = true;
 	this.FilterItems = true;
 }
+
+var lala = chrome.extension.getBackgroundPage().liko();
+console.log( lala );
 
 function optionsRestore() {
 	storage.get( 'userOptions', function( userOptions ) {

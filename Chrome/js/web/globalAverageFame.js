@@ -52,12 +52,38 @@ function execGlobalAverageFame() {
 			var mediaMC_val = mediaMC / numCities;
 			mediaMC_val = mediaMC_val.toFixed( 2 );
 
-			var tmpVal = '<tr class="even"><td>' + getValuePill( getLabel( 'l10nAFGlobal' ), 4 ) + '</td><td>' + getValuePill( mediaFame_val, 3 ) + '</div></td><td>' + getValuePill( mediaMC_val, 2 ) + '</div></td></tr>';
-			$( this ).after( tmpVal );
+			$( this ).after( getObjGlobalAverageFameTR( mediaFame_val, mediaMC_val ) );
 		} );
 
 	} );
 
 }
 
+/**
+ * Gets a TR object to be used in Global Average Fame
+ *
+ *  @param {int} media - value with the media  
+ *  @param {int} popularity - value with the popularity
+ * @return {object} an html object  
+ */
+
+function getObjGlobalAverageFameTR( media, popularity ) {
+	var myTR = document.createElement( "tr" );
+	myTR.className = 'even';
+
+	var myTD01 = document.createElement( "td" );
+	myTD01.appendChild( getObjPill( getLabel( 'l10nAFGlobal' ), 3 ) );
+
+	var myTD02 = document.createElement( "td" );
+	myTD02.appendChild( getObjPill( media, 4 )  );
+
+	var myTD03 = document.createElement( "td" );
+	myTD03.appendChild( getObjPill( popularity, 1 ) );
+
+	myTR.appendChild( myTD01 );
+	myTR.appendChild( myTD02 );
+	myTR.appendChild( myTD03 );
+
+	return myTR;
+}
 

@@ -41,9 +41,7 @@ function getLabel( label ) {
 function getValuePill( value, valueType ) {
 
 	var myType = parseInt( valueType );
-
 	var pill = '<div class="spcBox ';
-
 	var myValue;
 	if( valueType === 4 ) {
 		myValue = value;
@@ -76,9 +74,9 @@ function getValuePill( value, valueType ) {
 			case( value <= 90 ):
 				pill += 'spcBox-value--light-red">';
 				break;
-			case( value >=91 ):
+			case( value >= 91 ):
 				pill += 'spcBox-value--full">';
-				break;				
+				break;
 			default:
 				pill += 'spcBox-value--white">';
 				break;
@@ -180,7 +178,6 @@ function spCallEveryone( mainId ) {
 	itemListId = 1;
 	scRunCalling = window.open( '', 'gexWindow', '' );
 	var toCall = JSON.parse( window.localStorage.getItem( mainId ) );
-
 	var doit = function( key ) {
 		var tmpitemListId = itemListId;
 		if( tmpitemListId <= 9 ) {
@@ -193,16 +190,16 @@ function spCallEveryone( mainId ) {
 		scRunCalling.location = callUrl;
 		itemListId++;
 	};
-
 	var i = 0;
 	for( var key in toCall ) {
-		( function() {
+		( function( ) {
 			var k = key;
 			setTimeout(
-					function() {
+					function( ) {
 						doit( key );
 					}, 8000 * i );
-		} )();
+		} )( );
 		i += 1;
 	}
 }
+

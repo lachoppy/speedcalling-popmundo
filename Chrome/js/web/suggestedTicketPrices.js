@@ -27,7 +27,7 @@ function execSuggestedTicketPrices() {
 			//media value;
 			fame = $( this ).attr( 'title' );
 			fame = fame.replace( '/26', '' );
-			$( this ).before( getValuePill( stpGetPriceFame( fame, higerPrice ), 1 ) );
+			$( this ).before( getObjPill( stpGetPriceFame( fame, higerPrice ), 2 ) );
 		} );
 
 	} );
