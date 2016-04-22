@@ -1,89 +1,55 @@
 /*
  *Adds global fame media to your artist popularity page
- *
  */
-
-if( canExec( /\/World\/Popmundo.aspx\/Artist\/Popularity\/[0-9]*/g ) ) {
-	execGlobalAverageFame();
+if( globalCanRender( [ "\/World\/Popmundo.aspx\/Artist\/Popularity\/[0-9]*" ], [ 'GlobalFame_enabled' ] ) ) {
+	execFoldRecipeGroups();
 }
-
 
 function execGlobalAverageFame() {
-	chrome.storage.sync.get( 'userOptions', function( userOptions ) {
-		var canUse = true;
 
-		var numCities = 49;
-		var mediaFame = 0;
-		var mediaMC = 0;
+	//If the stored data is not OK, don't execute
+	if( !globalLocalStorageGet( 'Const_numberOfCities' ) ) {
+		return;
+	}
 
-		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length !== 0 ) {
-			userOptions = userOptions[ 'userOptions' ];
-			canUse = userOptions ['GlobalFame'];
-		}
+	var words = new classWordList( globalLocalStorageGet( 'Language' ) );
+	var numberOfCities = globalLocalStorageGet( 'Const_numberOfCities' );
+	var averageFame = 0;
+	var averageMediaCoverage = 0;
 
-		if( !canUse )
-			return;
+	$( "a[href^='/World/Popmundo.aspx/Help/Scoring/']" ).each( function() {
 
-		//Calculates the total fame value
-		$( "a[href^='/World/Popmundo.aspx/Help/Scoring/']" ).each( function() {
-			//media value;
-			var tmpVal = $( this ).attr( 'title' );
-			tmpVal = tmpVal.replace( '/26', '' );
-			//Increases the media
-			mediaFame += parseInt( tmpVal );
-		} );
-
-		//Calculates the total media coverage
-		$( "#tablefame div[class$='ProgressBar']" ).each( function() {
-			//media value;
-			var tmpVal = $( this ).attr( 'title' );
-			tmpVal = tmpVal.replace( '%', '' );
-
-			//Increases the media
-			mediaMC += parseInt( tmpVal );
-		} );
-
-		//Add global line to table
-		$( "tr:first" ).after( function() {
-			var mediaFame_val = mediaFame / numCities;
-			mediaFame_val = mediaFame_val.toFixed( 2 );
-
-			var mediaMC_val = mediaMC / numCities;
-			mediaMC_val = mediaMC_val.toFixed( 2 );
-
-			$( this ).after( getObjGlobalAverageFameTR( mediaFame_val, mediaMC_val ) );
-		} );
-
+		//Increases the average fame value
+		averageFame += parseInt( $( this ).attr( 'title' ).replace( '/26', '' ) );
 	} );
 
+	$( "#tablefame div[class$='ProgressBar']" ).each( function() {
+
+		//Increases the total average media coverage
+		averageMediaCoverage += parseInt( $( this ).attr( 'title' ).tmpVal.replace( '%', '' ) );
+	} );
+
+	//Calculates the average fame and media coverage
+	averageFame = parseInt( averageFame / numberOfCities );
+	averageMediaCoverage = parseInt( averageMediaCoverage / numberOfCities );
+
+	//Add a new line with the average values to the table
+	$( "tr:first" ).after( function() {
+
+		myTR.className = 'even';
+
+		var myTD = document.createElement( "td" );
+		myTD.appendChild( globalGetPill( words.get( 'AF_Global' ), 3 ) );
+		myTR.appendChild( myTD );
+
+		myTD = document.createElement( "td" );
+		myTD.appendChild( globalGetPill( averageFame, 4 ) );
+		myTR.appendChild( myTD );
+
+		myTD = document.createElement( "td" );
+		myTD.appendChild( globalGetPill( averageMediaCoverage, 1 ) );
+		myTR.appendChild( myTD );
+
+		$( this ).after( myTR );
+	} );
 }
-
-/**
- * Gets a TR object to be used in Global Average Fame
- *
- *  @param {int} media - value with the media  
- *  @param {int} popularity - value with the popularity
- * @return {object} an html object  
- */
-
-function getObjGlobalAverageFameTR( media, popularity ) {
-	var myTR = document.createElement( "tr" );
-	myTR.className = 'even';
-
-	var myTD01 = document.createElement( "td" );
-	myTD01.appendChild( getObjPill( getLabel( 'l10nAFGlobal' ), 3 ) );
-
-	var myTD02 = document.createElement( "td" );
-	myTD02.appendChild( getObjPill( media, 4 )  );
-
-	var myTD03 = document.createElement( "td" );
-	myTD03.appendChild( getObjPill( popularity, 1 ) );
-
-	myTR.appendChild( myTD01 );
-	myTR.appendChild( myTD02 );
-	myTR.appendChild( myTD03 );
-
-	return myTR;
-}
-

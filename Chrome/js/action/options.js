@@ -1,76 +1,80 @@
-var storage = chrome.storage.sync;
-
+var chromeStorage = chrome.storage.local;
 //Definition of the object which will be used to store the options
 //Attention, must be equal as background page bkgOptionsClass
-function classOptions() {
-	this.Delivery = true;
-	this.SpeedCalling = true;
-	this.Gossip = false;
-	this.FoldRecipes = true;
-	this.GlobalFame = true;
-	this.TicketPrice = true;
-	this.HigherPrices = false;
-	this.useHighColors = false;
-	this.ShowValues = true;
-	this.ShowPercentages = true;
-	this.FilterItems = true;
+function optionsDefaultValues() {
+	return {
+		option_DeliveryCheck_enabled: true,
+		option_FilterItems_enabled: true,
+		option_FoldRecipes_enabled: true,
+		option_GlobalFame_enabled: true,
+		option_QualityToValue_showPercentages: true,
+		option_QualityToValue_showValues: true,
+		option_SpeedCalling_enabled: true,
+		option_SpeedCalling_useGossip: false,
+		option_TicketPrice_enabled: true,
+		option_TicketPrice_useHighColors: false,
+		option_TicketPrice_useHigherPrices: false,
+		option_Language: 'en',
+		option_numberOfCities: 49
+	}
 }
 
-var lala = chrome.extension.getBackgroundPage().liko();
-console.log( lala );
+//Loads values and pass to the coontrols
+function optionsRestore( ) {
 
-function optionsRestore() {
-	storage.get( 'userOptions', function( userOptions ) {
-
+	//Load Chrome synched values loads them into the options interface
+	chromeStorage.get( optionsDefaultValues(), function( userOptions ) {
 		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length === 0 ) {
-			
-			userOptions = new classOptions();
-		} else {
-			userOptions = userOptions[ 'userOptions' ];
-		}
-		document.getElementById( 'ckbDeliveryCharges' ).checked = userOptions.Delivery;
-		document.getElementById( 'ckbSpeedCalling' ).checked = userOptions.SpeedCalling
-		document.getElementById( 'ckbGossip' ).checked = userOptions.Gossip
-		document.getElementById( 'ckbFoldRecipes' ).checked = userOptions.FoldRecipes;
-		document.getElementById( 'ckbGlobalFame' ).checked = userOptions.GlobalFame;
-		document.getElementById( 'ckbTicketPrice' ).checked = userOptions.TicketPrice;
-		document.getElementById( 'ckbHigherPrices' ).checked = userOptions.HigherPrices;
-		document.getElementById( 'ckbQualityValueNumbers' ).checked = userOptions.ShowValues;
-		document.getElementById( 'ckbQualityValuePercentages' ).checked = userOptions.ShowPercentages;
-		document.getElementById( 'ckbFilterItems' ).checked = userOptions.FilterItems;
+		document.getElementById( 'option_DeliveryCheck_enabled' ).checked = userOptions.option_DeliveryCheck_enabled;
+		document.getElementById( 'option_FilterItems_enabled' ).checked = userOptions.option_FilterItems_enabled;
+		document.getElementById( 'option_FoldRecipes_enabled' ).checked = userOptions.option_FoldRecipes_enabled;
+		document.getElementById( 'option_GlobalFame_enabled' ).checked = userOptions.option_GlobalFame_enabled;
+		document.getElementById( 'option_QualityToValue_showPercentages' ).checked = userOptions.option_QualityToValue_showPercentages;
+		document.getElementById( 'option_QualityToValue_showValues' ).checked = userOptions.option_QualityToValue_showValues;
+		document.getElementById( 'option_SpeedCalling_enabled' ).checked = userOptions.option_SpeedCalling_enabled;
+		document.getElementById( 'option_SpeedCalling_useGossip' ).checked = userOptions.option_SpeedCalling_useGossip;
+		document.getElementById( 'option_TicketPrice_enabled' ).checked = userOptions.option_TicketPrice_enabled;
+		document.getElementById( 'option_TicketPrice_useHighColors' ).checked = userOptions.option_TicketPrice_useHighColors;
+		document.getElementById( 'option_TicketPrice_useHigherPrices' ).checked = userOptions.option_TicketPrice_useHigherPrices;
+		
+		console.log( "SpeedCalling Options Data loaded to chromeStorage!" );
 	} );
 }
 
-function optionsSave() {
+function optionsSave( ) {
 
-	var userOptions = new classOptions();
-
-	userOptions.Delivery = document.getElementById( 'ckbDeliveryCharges' ).checked;
-	userOptions.SpeedCalling = document.getElementById( 'ckbSpeedCalling' ).checked;
-	userOptions.Gossip = document.getElementById( 'ckbGossip' ).checked;
-	userOptions.FoldRecipes = document.getElementById( 'ckbFoldRecipes' ).checked;
-	userOptions.GlobalFame = document.getElementById( 'ckbGlobalFame' ).checked;
-	userOptions.TicketPrice = document.getElementById( 'ckbTicketPrice' ).checked;
-	userOptions.HigherPrices = document.getElementById( 'ckbHigherPrices' ).checked;
-	userOptions.ShowValues = document.getElementById( 'ckbQualityValueNumbers' ).checked;
-	userOptions.ShowPercentages = document.getElementById( 'ckbQualityValuePercentages' ).checked;
-	userOptions.FilterItems = document.getElementById( 'ckbFilterItems' ).checked;
-
-	storage.set( { 'userOptions': userOptions }, function( ) {
-
-		var bkpBackground = chrome.extension.getBackgroundPage();
-		bkpBackground.bkgOptionsRestore();
-
-		setTimeout( function() {
-			window.close();
-		}, 750 );
+	//Loads default values
+	var userOptions = optionsDefaultValues();
+	userOptions.option_DeliveryCheck_enabled = document.getElementById( 'option_DeliveryCheck_enabled' ).checked;
+	userOptions.option_FilterItems_enabled = document.getElementById( 'option_FilterItems_enabled' ).checked;
+	userOptions.option_FoldRecipes_enabled = document.getElementById( 'option_FoldRecipes_enabled' ).checked;
+	userOptions.option_GlobalFame_enabled = document.getElementById( 'option_GlobalFame_enabled' ).checked;
+	userOptions.option_QualityToValue_showPercentages = document.getElementById( 'option_QualityToValue_showPercentages' ).checked;
+	userOptions.option_QualityToValue_showValues = document.getElementById( 'option_QualityToValue_showValues' ).checked;
+	userOptions.option_SpeedCalling_enabled = document.getElementById( 'option_SpeedCalling_enabled' ).checked;
+	userOptions.option_SpeedCalling_useGossip = document.getElementById( 'option_SpeedCalling_useGossip' ).checked;
+	userOptions.option_TicketPrice_enabled = document.getElementById( 'option_TicketPrice_enabled' ).checked;
+	userOptions.option_TicketPrice_useHighColors = document.getElementById( 'option_TicketPrice_useHighColors' ).checked;
+	userOptions.option_TicketPrice_useHigherPrices = document.getElementById( 'option_TicketPrice_useHigherPrices' ).checked;
+	alert( JSON.stringify(userOptions));
+	chromeStorage.set( userOptions, function( ) {
+		console.log( "SpeedCalling Options Data synched to chromeStorage!" );
 	} );
-
 }
 
 document.addEventListener( 'DOMContentLoaded', optionsRestore );
-
 if( ( document.getElementById( 'save' ) !== null ) && ( document.getElementById( 'save' ) !== undefined ) ) {
 	document.getElementById( 'save' ).addEventListener( 'click', optionsSave );
 }
+
+document.addEventListener( 'DOMContentLoaded', function( ) {
+	var myCheckboxes = document.getElementsByTagName( "input" );
+	for( var i = 0; i < myCheckboxes.length - 1; i++ ) {
+		if( myCheckboxes[i].getAttribute( 'type' ) !== 'checkbox' )
+			continue;
+		myCheckboxes[i].addEventListener( 'click', function( ) {
+			optionsSave( );
+		} );
+	}
+
+} );

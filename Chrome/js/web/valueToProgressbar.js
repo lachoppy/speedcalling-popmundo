@@ -1,38 +1,36 @@
 // Adds numbers to Progressbars in all pages
-if( canExec( /\/World\/Popmundo.aspx\/.*/g ) ) {
-
+if( globalCanRender( [ "\/World\/Popmundo.aspx\/.*" ], [ 'QualityToValue_showPercentages' ] ) ) {
 	execValueToProgressbar();
 }
 
 function execValueToProgressbar() {
-	chrome.storage.sync.get( 'userOptions', function( userOptions ) {
-		var canUse = true;
+	$( 'div[class*="rogressBar"]' ).each( function() {
 
-		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length !== 0 ) {
-			userOptions = userOptions[ 'userOptions' ];
-			canUse = userOptions ['ShowPercentages'];
-		}
+		//Creates the hide button
+		var mySpan = document.createElement( "span" );
+		mySpan.className = "progressBar";
 
-		$( 'div[class*="rogressBar"]' ).each( function() {
-			value = $( this ).attr( 'title' );
-			value = value.substr( 0, value.indexOf( "%" ) );
-			span = '<span class="scProgressBar">&nbsp;&nbsp;&nbsp;' + value + '%</span>';
-			value = $( this ).children( "div:first" ).append( span );
-		} );
+		var tmpValue = $( this ).attr( 'title' );
+		tmpValue = tmpValue.substr( 0, tmpValue.indexOf( "%" ) );
+		mySpan.textContent = tmpValue + '%';
+		$( this ).children( "div:first" ).append( mySpan );
 
-		$( '.plusMinusBar' ).each( function() {
-			value = $( this ).attr( 'title' );
-			value = value.substr( 0, value.indexOf( "%" ) );
-			span = '<span class="scProgressBar">&nbsp;&nbsp;&nbsp;' + value + '%</span>';
-			if( value >= 0 ) {
-				$( this ).children( "div" ).eq( 1 ).children().append( span );
-			} else {
-				$( this ).children( "div" ).eq( 0 ).children().append( span );
-			}
-		} );
-
-		if( !canUse )
-			return;
 	} );
+
+	$( '.plusMinusBar' ).each( function() {
+
+		//Creates the hide button
+		var mySpan = document.createElement( "span" );
+
+		var tmpValue = $( this ).attr( 'title' );
+		tmpValue = tmpValue.substr( 0, tmpValue.indexOf( "%" ) );
+		mySpan.textContent = tmpValue + '%';
+
+		if( tmpValue >= 0 ) {
+			$( this ).children( "div" ).eq( 1 ).children().append( mySpan );
+		} else {
+			$( this ).children( "div" ).eq( 0 ).children().append( mySpan );
+		}
+	} );
+
 }

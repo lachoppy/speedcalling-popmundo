@@ -1,42 +1,46 @@
-/*
- *Adds folding capabilities to your recipes page
- *
- */
-
-if( canExec( /\/World\/Popmundo.aspx\/Character\/Recipes\/[0-9]*/g ) ) {
-	execFoldRecipeGroups();
+//Adds folding capabilities to your recipes page
+if( globalCanRender( [ "\/World\/Popmundo.aspx\/Character\/Recipes\/[0-9]*" ], [ 'FoldRecipes_enabled' ] ) ) {
+	execFoldRecipeGroups( );
 }
 
-function execFoldRecipeGroups() {
-	chrome.storage.sync.get( 'userOptions', function( userOptions ) {
-		var canUse = true;
+function execFoldRecipeGroups( ) {
 
-		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length !== 0 ) {
-			userOptions = userOptions[ 'userOptions' ];
-			canUse = userOptions ['FoldRecipes'];
-		}
+	var tableId = '';
+	$( 'table.data.sortable' ).each( function( ) {
 
-		if( !canUse )
-			return;
+		//Gets the ID of the table to be hidden
+		tableId = $( this ).attr( 'id' );
+		$( this ).find( 'thead tr:first' ).each( function( ) {
 
-		$( 'table.data.sortable' ).each( function() {
-			var tblId = $( this ).attr( 'id' );
-			$( this ).find( 'th.header' ).not( '.width60' ).each( function() {
-				var btnCode = frgGetClickImage( '/img/uncheck.png', 'l10nFRunCheck', "jQuery( '#" + tblId + " tbody' ).hide();" );
-				btnCode += frgGetClickImage( '/img/check.png', 'l10nFRCheck', "jQuery( '#" + tblId + " tbody' ).show();" );
-				$( this ).append( btnCode );
-			} );
+			var words = new classWordList( globalLocalStorageGet( 'Language' ) );
+			//Created a new row
+			var myTR = document.createElement( 'tr' );
+			myTR.className = 'odd';
+			var myTD = document.createElement( 'td' );
+			myTD.colspan = 2;
+			//Creates the hide button
+			var myButton = document.createElement( "input" );
+			myButton.type = 'button';
+			myButton.className = 'spcInputButton';
+			myButton.value = words.get( 'FR_HideGroup' );
+			myButton.setAttribute( "onclick", "jQuery( '#" + tableId + " tbody' ).hide();" );
+			myTD.appendChild( myButton );
+			//Creates the show button
+			myButton = document.createElement( "input" );
+			myButton.type = 'button';
+			myButton.className = 'spcInputButton';
+			myButton.value = words.get( 'FR_ShowGroup' );
+			myButton.setAttribute( "onclick", "jQuery( '#" + tableId + " tbody' ).show();" );
+			myTD.appendChild( myButton );
+			myTR.appendChild( myTD );
+			$( myTR ).insertBefore( $( this ) );
+
+
+
 		} );
-	} );
-}
 
-function frgGetClickImage( image, label, onclick ) {
-	return	'<div class="spcBox spcBox-button--small" title="'
-			+ getLabel( label )
-			+ '" onclick="'
-			+ onclick
-			+ '" style="background-image: url(\''
-			+ chrome.extension.getURL( image )
-			+ '\');">&nbsp;</div>';
+
+	} );
+
+
 }

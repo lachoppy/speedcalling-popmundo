@@ -12,11 +12,12 @@
 		</div>
 		<div class="content">
 			<h1>Extension options</h1>
+			<h3>You need to logoff and login back into the game for the changes to be effective</h3>
 			<ul>
 				<li>
 					<h3>Item Offers</h3>
 					<label>
-						<input type="checkbox" id="ckbDeliveryCharges">
+						<input type="checkbox" id="option_DeliveryCheck_enabled">
 						Enable "<em>Pay delivery charges, if any</em>" by default.
 					</label>
 					<p>If enabled, this option will make you pay for the delivery of items, preventing undeliverable items because the other person is not in the same place as you.</p>
@@ -24,12 +25,12 @@
 				<li>
 					<h3>SpeedCalling</h3>
 					<label>
-						<input type="checkbox" id="ckbSpeedCalling">
+						<input type="checkbox" id="option_SpeedCalling_enabled">
 						Enables the <em>SpeedCalling</em> feature.
 					</label>
 					<p>Enables the <em>SpeedCalling</em> feature, which allows you to call all your friends in your address book automatically with a single click.</p>
 					<label>
-						<input type="checkbox" id="ckbGossip">
+						<input type="checkbox" id="option_SpeedCalling_useGossip">
 						Uses <em>Gossip on the phone</em> as default option instead <em>Wazzup call</em>.
 					</label>
 					<p>If enabled, this option will use <em>Gossip on the phone</em> as the default option in <em>SpeedCalling</em> instead <em>Wazzup call</em>.</p>
@@ -37,7 +38,7 @@
 				<li>
 					<h3>Recipes</h3>
 					<label>
-						<input type="checkbox" id="ckbFoldRecipes">
+						<input type="checkbox" id="option_FoldRecipes_enabled">
 						Enables the <em>Fold groups</em> on the recipes page.
 					</label>
 					<p>If enabled, this option will add two buttons to your <em>recipes page</em> allowing you to fold the groups of recipes, improving readability.</p>
@@ -45,7 +46,7 @@
 				<li>
 					<h3>Global Average Fame</h3>
 					<label>
-						<input type="checkbox" id="ckbGlobalFame">
+						<input type="checkbox" id="option_GlobalFame_enabled">
 						Enables the <em>Global Average Fame</em> feature.
 					</label>
 					<p>If enabled, this option will add to your artist's <em>Popularity page</em> the average global fame and popularity.</p>
@@ -54,37 +55,102 @@
 				<li>
 					<h3>Suggested Ticket Prices</h3>
 					<label>
-						<input type="checkbox" id="ckbTicketPrice">
+						<input type="checkbox" id="option_TicketPrice_enabled">
 						Enabled the <em>Suggested Ticket Prices</em> feature.
 					</label>
 					<p>If enabled, this option will show the suggested price for tickets according to your artist's fame in a given city.</p>					
 				</li>
 				<li>
-					<input type="checkbox" id="ckbHigherPrices">
+					<input type="checkbox" id="option_TicketPrice_useHigherPrices">
 					Use <em>higher price set</em> for suggested Ticket Prices.
 				</li>
 
 				<li>
 					<h3>Quality to Value</h3>
 					<label>
-						<input type="checkbox" id="ckbQualityValueNumbers">
+						<input type="checkbox" id="option_QualityToValue_showValues">
 						Enables <em>number display</em> with nominal qualities.
 					</label>
 					<p>If enabled, will display numbers along with nominal qualities.</p>
 					<label>
-						<input type="checkbox" id="ckbQualityValuePercentages">
+						<input type="checkbox" id="option_TicketPrice_useHighColors">
+						Enables <em>High colors</em> scheme. If disabled, pastel scheme will be used.
+					</label>
+					<p><span>High colors</span>
+						<span style="background-color: #ff8000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ffb500;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ffeb00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ddff00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #a7ff00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #71ff00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #3bff00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #05ff00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00ff31;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00ff67;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00ff9d;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00ffd3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00f5ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #00bfff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #0089ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #0053ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #001dff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #1900ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #4e00ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #8400ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ba00ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #f000ff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ff00d8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ff00a2;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ff006c;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ff0036;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ff0000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ffffff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					</p>
+					<p>
+						<span>Pastel colors</span>
+						<span style="background-color: #8A880F;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #A9A720;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #C9C632;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #E9E644;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #C7DD59;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #A5D56E;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #84CD84;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #7DD095;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #77D3A7;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #71D6B8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #6BD9CA;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #65DCDC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #65C4DC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #65ACDC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #6595DC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #657DDC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #6566DC;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #7C65D7;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #9465D2;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #AC65CD;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #C465C8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #DC65C4;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #E060B0;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #E45C9D;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #E95889;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ED5476;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #F25063;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span style="background-color: #ffffff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					</p>				
+					<label>
+						<input type="checkbox" id="option_QualityToValue_showPercentages">
 						Enables <em>percentage display</em> in progress bars.
 					</label>		
 					<p>If enabled, will display numbers along with progress bars.</p>
 				</li>
-			<li>
+				<li>
 					<h3>Filter items</h3>
 					<label>
-						<input type="checkbox" id="ckbFilterItems">
+						<input type="checkbox" id="option_FilterItems_enabled">
 						Enables the <em>filter items</em> in locale feature.
 					</label>
 					<p>If enabled, will add an option in your locale pages to filter items by a character ID.</p>
-			</li>
+				</li>
 			</ul>	
 			<button id="save">Save</button><span id="status" style="visibility: hidden;"> Options saved.</span>
 		</div>

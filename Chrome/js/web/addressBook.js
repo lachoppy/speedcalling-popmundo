@@ -1,167 +1,120 @@
 // Handles the code necessary for the addressbook page
+if( globalCanRender( [ /\/World\/Popmundo.aspx\/Character\/AddressBook/ ], [ 'SpeedCalling_enabled' ] ) ) {
 
-if( canExec( /\/World\/Popmundo.aspx\/Character\/AddressBook/g ) ) {
-
-
-	var objScript = '<script type="text/javascript" src="' + chrome.extension.getURL( 'js/global/speedcalling.js' ) + '"></script>';
-
-	$( 'body' ).append( objScript );
-
+	//link javascript in the page
+	var myScript = document.createElement( 'script' );
+	myScript.type = 'text/javascript';
+	myScript.src = chrome.extension.getURL( 'js/accessible/injection.js' );
+	$( 'head' ).append( myScript );
 
 	execAddressBook();
 }
 
 function execAddressBook() {
-	chrome.storage.sync.get( 'userOptions', function( userOptions ) {
-		var canUse = true;
 
-		//Default call action value
-		var scCharacterDefaultCallOption = 24;
+	var myCallOptions = new classPossibleCallOptions();
+	var words = new classWordList( globalLocalStorageGet( 'Language' ) );
 
-		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length !== 0 ) {
-			userOptions = userOptions[ 'userOptions' ];
-			canUse = userOptions ['SpeedCalling'];
-			if( userOptions ['Gossip'] ) {
-				scCharacterDefaultCallOption = 121;
-			}
-		}
+	// Array with all Character ID keys
+	var myCharacterIDs = [ ];
 
-		if( !canUse )
-			return;
+	//Runtime values for character options
+	var myCharacterOptions_RunTime = { };
 
-		// Character ID keys
-		var scCharacterIDs = [ ];
+	//Saved values for character options
+	var myCharacterOptions_Storage = { };
 
-		//Runtime values for character options
-		var scCharacterOptionsRunTime = { };
-
-		//Saved values for character options
-		var scCharacterOptionsStorage = { };
-
-		// All possible values for calling
-		var scPossibleOptions = Array( 9999, 121, 24, 61, 58, 26, 25, 73, 74 );
-
-		// Url to make the calls
-		var scUrlToCall = '/World/Popmundo.aspx/Interact/Phone/';
-
-		// Url to mark the page as usable by this script
-		var scUrlToCallToken = '#toCall';
-
-		abInjectSpeedCalling();
-
-		abCreatesCallButton();
-
-		//Loads all current contacts (existant in the links)
-		$( "a[id^='ctl00_cphLeftColumn_ctl00_repAddressBook_ctl'][id$=_lnkCharacter]" ).each( function( ) {
-			scCharacterIDs.push( scGetIdFromUrl( $( this ).attr( 'href' ) ) );
-		} );
-
-		//Loads all contact entries values into memory and updates localStorage
-		var locMainStorageID = getCookie( 'scMainStorageId' );
-
-		//Loads default call action value for each contact (existant in the links)
-		for( i = 0; i < scCharacterIDs.length; i++ ) {
-			scCharacterOptionsRunTime[ scCharacterIDs[ i ] ] = scCharacterDefaultCallOption;
-		}
-
-		//Updates the localStorage if not present
-		if( window.localStorage.getItem( locMainStorageID ) === null ) {
-			window.localStorage.setItem( locMainStorageID, JSON.stringify( scCharacterOptionsRunTime ) );
-			scCharacterOptionsStorage = scCharacterOptionsRunTime;
-		} else {
-			scCharacterOptionsStorage = JSON.parse( window.localStorage.getItem( locMainStorageID ) );
-		}
-
-
-		//Loads stored values into runtime values
-		for( i = 0; i < scCharacterIDs.length; i++ ) {
-			if( typeof ( scCharacterOptionsStorage[ scCharacterIDs[ i ] ] ) !== 'undefined' ) {
-				scCharacterOptionsRunTime[ scCharacterIDs[ i ] ] = scCharacterOptionsStorage[ scCharacterIDs[ i ] ];
-			}
-		}
-
-		//Saves the localStorage
-		window.localStorage.setItem( locMainStorageID, JSON.stringify( scCharacterOptionsRunTime ) );
-
-		scCreateCharacterOptionComboboxes( scUrlToCall, scUrlToCallToken, scPossibleOptions, scCharacterOptionsRunTime );
-	} );
-}
-
-function abInjectSpeedCalling() {
-	var jScript = document.createElement( 'script' );
-	// TODO: add "script.js" to web_accessible_resources in manifest.json
-	jScript.src = chrome.extension.getURL( 'js/global/speedcalling.js' );
-	( document.head || document.documentElement ).appendChild( jScript );
-}
-
-//Adds Call button line to the Address button
-function abCreatesCallButton() {
-
-	var locMainStorageID = getCookie( 'scMainStorageId' );
-
-	var objLine = '<tr class="even"><td colspan="8">'
-
-			+ '<div class="spcBox spcBox-button--big" title="'
-			+ getLabel( 'l10nSPCallButton' )
-			+ '" onclick="'
-			+ "spCallEveryone('" + locMainStorageID + "')"
-			+ '" style="background-image: url(\''
-			+ chrome.extension.getURL( '/img/16.png' )
-			+ '\');"><p>'
-			+ getLabel( 'l10nSPCallButton' )
-			+ '</p></div>'
-			+ '<a class="CallEveryone" href="/World/Popmundo.aspx/Conversations/Conversation/3248185">'
-			+ getLabel( 'l10nSPReportBugs' )
-			+ '</a>'
-			+ '</td></tr>';
-	$( objLine ).insertAfter( 'thead' );
-}
-
-// Returns the character ID based on the link URI
-function scGetIdFromUrl( urlValue ) {
-	var urlItems = urlValue.split( '/' );
-	return urlItems[urlItems.length - 1];
-}
-
-// Creates the comboboxes based on contact ID to call, passed on toCallCharID
-function scGetCharacterOptionCombobox( toCallCharID, charOptions, charOptionsRunTime ) {
-
-	var locMainStorageID = getCookie( 'scMainStorageId' );
-
-	var objSelect = document.createElement( "select" );
-	objSelect.id = locMainStorageID + '_ContId_' + toCallCharID;
-	objSelect.name = objSelect.id;
-	objSelect.className = "CallEveryone";
-	objSelect.setAttribute( "onchange", "scStoreCharacterOption( '" + locMainStorageID + "', '" + toCallCharID + "', '" + objSelect.id + "' )" );
-
-	// Goes trough all possible values and creates the options
-	for( var i = 0; i < charOptions.length; i++ ) {
-		var objOption = document.createElement( "option" );
-		objOption.value = charOptions[i];
-		objOption.text = getLabel( 'l10nSP' + charOptions[i] );
-
-		if( charOptionsRunTime[toCallCharID] == charOptions[i] ) {
-			objOption.setAttribute( "selected", "selected" );
-		}
-
-		objSelect.appendChild( objOption );
+	//Sets a cookie with the main ID of the character
+	if( ( $( '.idHolder' ).first().html() !== null ) && ( $( '.idHolder' ).first().html() !== undefined ) ) {
+		globalSetCookie( "scMainCharID", $( '.idHolder' ).first().html() );
+		globalSetCookie( "scMainStorageId", "_GEX_MAIN_ID_" + $( '.idHolder' ).first().html() );
 	}
 
-	return objSelect;
-}
+	var myTR = document.createElement( "tr" );
+	myTR.className = 'even';
 
-//Creates the selects to be used with the contacts
-function scCreateCharacterOptionComboboxes( urlToCall, urlToken, charOptions, charOptionsRunTime ) {
+	var myTD = document.createElement( "td" );
+	myTD.colspan = 8;
+
+	var myButton = document.createElement( "input" );
+	myButton.type = 'button';
+	myButton.value = words.get( 'SP_CallButton' );
+	myButton.onclick = "inpageCallEveryone('" + getCookie( 'scMainStorageId' ) + "');";
+	myTD.appendChild( myButton );
+
+	var myLink = document.createElement( "a" );
+	myLink.className = 'callEveryone';
+	myLink.href = '/World/Popmundo.aspx/Conversations/Conversation/3248185';
+	myLink.textContent = words.get( 'SP_ReportBugs' );
+	myTD.appendChild( myLink );
+
+	myTR.appendChild( myTD );
+	$( myTR ).insertAfter( 'thead' );
+
+	//Loads all current contacts (existant in the links)
+	$( "a[id^='ctl00_cphLeftColumn_ctl00_repAddressBook_ctl'][id$=_lnkCharacter]" ).each( function( ) {
+		var splitUrl = $( this ).attr( 'href' ).split( '/' );
+		myCharacterIDs.push( splitUrl[ splitUrl.length - 1 ] );
+	} );
+
+	//TO REMOVE var locMainStorageID = getCookie( 'scMainStorageId' );
+
+	//Loads default call action value for each contact (existant in the links)
+	for( i = 0; i < myCharacterIDs.length; i++ ) {
+		myCharacterOptions_RunTime[ myCharacterIDs[ i ] ] = myCallOptions.default();
+	}
+
+	//Updates the localStorage if not present
+	if( window.localStorage.getItem( getCookie( 'scMainStorageId' ) ) === null ) {
+		window.localStorage.setItem( getCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
+		myCharacterOptions_Storage = myCharacterOptions_RunTime;
+	} else {
+		myCharacterOptions_Storage = JSON.parse( window.localStorage.getItem( getCookie( 'scMainStorageId' ) ) );
+	}
+
+	//Loads stored values into runtime values
+	for( i = 0; i < myCharacterIDs.length; i++ ) {
+		if( typeof ( myCharacterOptions_Storage[ myCharacterIDs[ i ] ] ) !== 'undefined' ) {
+			myCharacterOptions_RunTime[ myCharacterIDs[ i ] ] = myCharacterOptions_Storage[ myCharacterIDs[ i ] ];
+		}
+	}
+
+	//Saves the localStorage
+	window.localStorage.setItem( getCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
+
+	//Loops trhough all the contacts and change their links
 	$( "a[id^='ctl00_cphLeftColumn_ctl00_repAddressBook_ctl'][id$=_lnkCharacter]" ).each( function() {
 
 		var objId = $( this ).attr( 'id' );
-		currentCharID = scGetIdFromUrl( $( this ).attr( 'href' ) );
-		$( this ).attr( 'href', urlToCall + currentCharID + urlToken + getCookie( 'scMainCharID' ) );
-		$( this ).attr( 'target', '_BLANK' );
-		var objSelect = scGetCharacterOptionCombobox( currentCharID, charOptions, charOptionsRunTime );
+		var splitUrl = $( this ).attr( 'href' ).split( '/' );
+		var currentCharID = splitUrl[ splitUrl.length - 1 ];
 
-		$( this ).closest( 'td' ).append( objSelect );
+		$( this ).attr( 'href', myCallOptions.callURI + currentCharID + myCallOptions.callToken + getCookie( 'scMainCharID' ) );
+		$( this ).attr( 'target', '_BLANK' );
+
+		//Creates the select objects
+		var mySelect = document.createElement( "select" );
+		mySelect.id = getCookie( 'scMainStorageId' ) + '_ContId_' + currentCharID;
+		mySelect.name = mySelect.id;
+		mySelect.className = "callEveryone";
+		mySelect.onchange = "inpageStoreCharacterOption('" + myCallOptions.default() + "', '" + getCookie( 'scMainStorageId' ) + "', '" + currentCharID + "', '" + mySelect.id + "')";
+
+		// Goes trough all possible values and creates the options
+		for( var i = 0; i < myCallOptions.options - 1; i++ ) {
+			//Create the option object
+			var myOption = document.createElement( "option" );
+			myOption.value = myCallOptions.charOptions[i];
+			myOption.textContent = words.get( 'SP_' + myCallOptions.getOptions()[i] );
+
+			//Selects if it's the chosen option by the charId
+			if( myCharacterOptions_RunTime[currentCharID] === myCallOptions.options[i] ) {
+				myOption.selected = true;
+			}
+
+			mySelect.appendChild( myOption );
+		}
+
+		$( this ).closest( 'td' ).append( mySelect );
 
 	} );
 }

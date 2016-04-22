@@ -25,11 +25,6 @@
 		"storage",
 		"cookies"
 	],
-	"background": {
-		"scripts": [
-			"js/global/background.js"
-		]
-	},
 	"content_scripts": [
 		{
 			"matches": [
@@ -38,8 +33,10 @@
 			],
 			"js": [
 				"js/library/jquery.js",
+				"js/i18n/en.js",
+				"js/global/classes.js",
 				"js/global/speedcalling.js",
-				"js/global/createObjects.js",
+				"js/web/chooseCharacter.js",
 				"js/global/persistent.js",
 				"js/web/payDeliveryCharges.js",
 				"js/web/suggestedTicketPrices.js",
@@ -61,6 +58,7 @@
 	],
 	"web_accessible_resources": [
 		"img/*",
+		"js/accessible/injection.js",
 		"js/global/speedcalling.js",
 		"js/global/createObjects.js",
 		"src/opt/options.html"

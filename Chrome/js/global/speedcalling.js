@@ -1,205 +1,214 @@
-//Checks a regex expression with and URI and verifies if the current URL has it
-function canExec( execRegex ) {
-	var execCurrentUrl = window.location.href;
-	if( execCurrentUrl.match( execRegex ) ) {
-		return true;
-	} else {
+/*
+ * Checks if regex match the current URI and if options allow the execution
+ * @param {type} regex - the regex to be verified
+ * @param {type} options - array with options
+ * @returns {Boolean} true if can render, false if not
+ */
+function globalCanRender( regex, options ) {
+
+	//Return false if parameters are not correctly passed
+	if( regex === null || regex === undefined || typeof regex === 'string' ) {
 		return false;
+	}
+
+	//Return true if one of the regexes match the URL
+	for( var i = 0; i < regex.length; i++ ) {
+		if( window.location.href.match( regex[i] ) ) {
+			return true;
+		}
+	}
+
+	//If no options, return true
+	if( options === null || options === undefined ) {
+		return true;
+	}
+
+	//If one of the options is negative, return false
+	for( var i = 0; i < options.length; i++ ) {
+		if( !globalLocalStorageGet( options[i] ) ) {
+			return false;
+		}
+	}
+
+	//Finally
+	return false;
+
+}
+
+/*
+ * Loads localStorage and checks if a key exists
+ * @param {type} key - the key you are looking for
+ * @returns {Boolean|String} the key value or false, if there's no key
+ */
+function globalLocalStorageGet( key ) {
+	var myOptions = JSON.parse( localStorage.getItem( 'speedCalling' ) );
+	if( myOptions === null || myOptions === undefined ) {
+		myOptions = new classOptions();
+	}
+
+	if( !( key in myOptions ) ) {
+		return false;
+	} else {
+		return myOptions[ key ];
 	}
 }
 
+/**
+ * Returns a classPillValues object
+ *
+ * @param {integer} value - the number value which will be used in the pill
+ * @return {classPillValues}
+ */
+function globalGetPillValue( value ) {
+
+	var values = new classPillValues();
+
+	var className = ( globalLocalStorageGet( 'TicketPrice_useHighColors' ) ) ? 'pill high--level-' : 'pill pastel--level-';
+
+	if( isNaN( value ) ) {
+		values.text = value;
+	} else {
+		//Handles the single values
+		switch( true ) {
+			case parseInt( value ) <= 0:
+				values.number = '00';
+				values.classNumber = className + values.number;
+				values.currency = values.number + '$';
+				values.classCurrency = className + 'money';
+				break;
+			case parseInt( value ) < 10:
+				values.number = '0' + value;
+				values.classNumber = className + values.number;
+				values.currency = values.number + '$';
+				values.classCurrency = className + 'money';
+				break;
+			default:
+				values.number = ( value >= 26 ) ? 26 : value;
+				values.classNumber = className + parseInt( values.number );
+				values.currency = values.number + '$';
+				values.classCurrency = className + 'money';
+				break;
+		}
+		//Handles percentage
+		switch( true ) {
+			case parseInt( value ) === 0:
+				values.classPercentage = className + '00';
+				values.percentage = values.classPercentage + '%';
+				break;
+			case parseInt( value ) >= 100:
+				values.classPercentage = className + '26';
+				values.percentage = value + '%';
+				break;
+			case parseInt( value ) < 40:
+				values.classPercentage = className + ( '0' + parseInt( ( ( value - ( value % 4 ) ) / 4 ) ) );
+				values.percentage = value + '%';
+				break;
+			default:
+				values.classPercentage = className + ( parseInt( ( value - ( value % 4 ) ) / 4 ) );
+				values.percentage = value + '%';
+				break;
+		}
+	}
+	return values;
+}
+
+/**
+ * returns a "pill", a box HTML object with a color and a value
+ *
+ * @param {integer} value - the number value which will be used in the pill
+ * @param {integer} useType - the type of the pill. 1 for percentage. 2 for currency. 3 for string. Anything else to number
+ * @return {object} an html object
+ */
+function globalGetPill( value, useType ) {
+	var myValue = globalGetPillValue( value );
+
+	var mySpan = document.createElement( "span" );
+	switch( useType ) {
+		case 1:
+			mySpan.className = myValue.classPercentage;
+			mySpan.textContent = myValue.percentage;
+			break;
+		case 2:
+			mySpan.className = myValue.classCurrency;
+			mySpan.textContent = myValue.currency;
+			break;
+		case 3:
+			mySpan.className = myValue.classText;
+			mySpan.textContent = myValue.text;
+			break;
+		default:
+			mySpan.className = myValue.classNumber;
+			mySpan.textContent = myValue.number;
+			break;
+	}
+	return mySpan;
+}
+
 //Sets a cookie and its value
-function setCookie( cname, cvalue ) {
+function globalSetCookie( cname, cvalue ) {
 	var temp = cname + "=" + cvalue + "; "
 			+ "max-age=604800; "
 			+ "path=/; "
-			+ "domain=popmundo.com"
+			+ "domain=popmundo.com";
 	document.cookie = temp;
 }
 
 //Gets a cookie value
-function getCookie( cname ) {
+function globalGetCookie( cname ) {
 	var name = cname + "=";
 	var ca = document.cookie.split( ';' );
 	for( var i = 0; i < ca.length; i++ ) {
 		var c = ca[i];
-		while( c.charAt( 0 ) == ' ' )
+		while( c.charAt( 0 ) === ' ' )
 			c = c.substring( 1 );
-		if( c.indexOf( name ) == 0 )
+		if( c.indexOf( name ) === 0 )
 			return c.substring( name.length, c.length );
 	}
 	return "";
 }
 
-//Gets translated messages from the translation file
-function getLabel( label ) {
-	return chrome.i18n.getMessage( label );
-}
-
-//Gets a span with the color based on the value
-//ValueType: 1= Money, 2=Percentage, 3=Number, 4=none
-function getValuePill( value, valueType ) {
-
-	var myType = parseInt( valueType );
-	var pill = '<div class="spcBox ';
-	var myValue;
-	if( valueType === 4 ) {
-		myValue = value;
-	} else {
-		myValue = parseInt( value );
-		myValue = ( myValue < 10 ) ? ( "0" + myValue ) : myValue;
-	}
-
-	if( myType === 1 ) {
-		pill += 'spcBox-value--money">';
-	}
-
-	if( myType === 2 ) {
-		switch( true ) {
-			case( value <= 10 ):
-				pill += 'spcBox-value--dark-red">';
-				break;
-			case( value <= 25 ):
-				pill += 'spcBox-value--light-red">';
-				break;
-			case( value <= 40 ):
-				pill += 'spcBox-value--dark-green">';
-				break;
-			case( value <= 60 ):
-				pill += 'spcBox-value--light-green">';
-				break;
-			case( value <= 80 ):
-				pill += 'spcBox-value--dark-yellow">';
-				break;
-			case( value <= 90 ):
-				pill += 'spcBox-value--light-red">';
-				break;
-			case( value >= 91 ):
-				pill += 'spcBox-value--full">';
-				break;
-			default:
-				pill += 'spcBox-value--white">';
-				break;
-		}
-	}
-
-	if( myType === 3 ) {
-		switch( true ) {
-			case( value <= 2 ):
-				pill += 'spcBox-value--dark-red">';
-				break;
-			case( value <= 5 ):
-				pill += 'spcBox-value--light-red">';
-				break;
-			case( value <= 8 ):
-				pill += 'spcBox-value--dark-green">';
-				break;
-			case( value <= 13 ):
-				pill += 'spcBox-value--light-green">';
-				break;
-			case( value <= 17 ):
-				pill += 'spcBox-value--dark-yellow">';
-				break;
-			case( value <= 22 ):
-				pill += 'spcBox-value--light-yellow">';
-				break;
-			case( value >= 23 ):
-				pill += 'spcBox-value--full">';
-				break;
-			default:
-				pill += 'spcBox-value--white">';
-				break;
-		}
-	}
-
-	if( myType === 4 ) {
-		pill += 'spcBox-value--white-medium">';
-	}
-
-	switch( myType ) {
-		case( 1 ):
-			pill += '<p>' + myValue + '€</p></div>';
-			break;
-		case( 2 ):
-			pill += '<p>' + myValue + '%</p></div>';
-			break;
-		default:
-			pill += '<p>' + myValue + '&nbsp;</p></div>';
-	}
-
-	return pill;
-}
-
-//Updates the localStorage with the new values
-function scStoreCharacterOption( mainId, charId, cbbId ) {
-//Gets the value for the given cbbId
-	var tmpValue = 24;
-	if( typeof document.getElementById( cbbId ) != 'undefined' ) {
-		tmpValue = document.getElementById( cbbId ).value;
-	}
-
-	storedValues = JSON.parse( window.localStorage.getItem( mainId ) );
-	storedValues[charId] = tmpValue;
-	window.localStorage.setItem( mainId, JSON.stringify( storedValues ) );
-}
-
-// Calls everyone in the contact list
-function scCallEveryone( mainId ) {
-	itemListId = 1;
-	scRunCalling = window.open( '', 'gexWindow', '' );
-	var toCall = JSON.parse( window.localStorage.getItem( mainId ) );
-	var doit = function( key ) {
-		var tmpitemListId = itemListId;
-		if( tmpitemListId <= 9 ) {
-			tmpitemListId = 'ctl00_cphLeftColumn_ctl00_repAddressBook_ctl0' + tmpitemListId + '_lnkCharacter';
-		} else {
-			tmpitemListId = 'ctl00_cphLeftColumn_ctl00_repAddressBook_ctl' + tmpitemListId + '_lnkCharacter';
-		}
-		var callObject = document.getElementById( tmpitemListId );
-		var callUrl = 'http://' + window.location.hostname + callObject.getAttribute( "href" );
-		scRunCalling.location = callUrl;
-		itemListId++;
-	};
-	var i = 0;
-	for( var key in toCall ) {
-		( function( ) {
-			var k = key;
-			setTimeout(
-					function( ) {
-						doit( key );
-					}, 8000 * i );
-		} )( );
-		i += 1;
+//Definition of the object which will be used to store the options
+//Attention, must be equal as background page bkgOptionsClass
+function globalOptionsDefaultValues() {
+	return {
+		option_DeliveryCheck_enabled: true,
+		option_FilterItems_enabled: true,
+		option_FoldRecipes_enabled: true,
+		option_GlobalFame_enabled: true,
+		option_QualityToValue_showPercentages: true,
+		option_QualityToValue_showValues: true,
+		option_SpeedCalling_enabled: true,
+		option_SpeedCalling_useGossip: false,
+		option_TicketPrice_enabled: true,
+		option_TicketPrice_useHighColors: false,
+		option_TicketPrice_useHigherPrices: false,
+		option_Language: 'en',
+		option_numberOfCities: 49
 	}
 }
 
-// Calls everyone in the contact list
-function spCallEveryone( mainId ) {
-	itemListId = 1;
-	scRunCalling = window.open( '', 'gexWindow', '' );
-	var toCall = JSON.parse( window.localStorage.getItem( mainId ) );
-	var doit = function( key ) {
-		var tmpitemListId = itemListId;
-		if( tmpitemListId <= 9 ) {
-			tmpitemListId = 'ctl00_cphLeftColumn_ctl00_repAddressBook_ctl0' + tmpitemListId + '_lnkCharacter';
-		} else {
-			tmpitemListId = 'ctl00_cphLeftColumn_ctl00_repAddressBook_ctl' + tmpitemListId + '_lnkCharacter';
-		}
-		var callObject = document.getElementById( tmpitemListId );
-		var callUrl = 'http://' + window.location.hostname + callObject.getAttribute( "href" );
-		scRunCalling.location = callUrl;
-		itemListId++;
-	};
-	var i = 0;
-	for( var key in toCall ) {
-		( function( ) {
-			var k = key;
-			setTimeout(
-					function( ) {
-						doit( key );
-					}, 8000 * i );
-		} )( );
-		i += 1;
-	}
-}
+//Loads values and pass to the coontrols
+function globalOptionsLoadToLocalStorage( ) {
 
+	//Load Chrome synched values loads them into the options interface
+	chrome.storage.local.get( globalOptionsDefaultValues(), function( userOptions ) {
+
+		var myItems = new classOptions();
+
+		myItems.DeliveryCheck_enabled = userOptions.option_DeliveryCheck_enabled;
+		myItems.FilterItems_enabled = userOptions.option_FilterItems_enabled;
+		myItems.FoldRecipes_enabled = userOptions.option_FoldRecipes_enabled;
+		myItems.GlobalFame_enabled = userOptions.option_GlobalFame_enabled;
+		myItems.QualityToValue_showPercentages = userOptions.option_QualityToValue_showPercentages;
+		myItems.QualityToValue_showValues = userOptions.option_QualityToValue_showValues;
+		myItems.SpeedCalling_enabled = userOptions.option_SpeedCalling_enabled;
+		myItems.SpeedCalling_useGossip = userOptions.option_SpeedCalling_useGossip;
+		myItems.TicketPrice_enabled = userOptions.option_TicketPrice_enabled;
+		myItems.TicketPrice_useHighColors = userOptions.option_TicketPrice_useHighColors;
+		myItems.TicketPrice_useHigherPrices = userOptions.option_TicketPrice_useHigherPrices;
+
+		localStorage.setItem( "speedCalling", JSON.stringify( myItems ) );
+
+		console.log( "SpeedCalling Options Data loaded into localStorage!" );
+	} );
+}

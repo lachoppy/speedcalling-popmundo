@@ -1,26 +1,14 @@
 // Adds numbers to quality values in all pages
-if( canExec( /\/World\/Popmundo.aspx\/.*/g ) ) {
-
+if( globalCanRender( [ /\/World\/Popmundo.aspx\/.*/ ], [ 'QualityToValue_showValues' ] ) ) {
 	execValueToQuality();
 }
 
 function execValueToQuality() {
-	chrome.storage.sync.get( 'userOptions', function( userOptions ) {
-		var canUse = true;
 
-		//Check ifobject exists in the sync storage
-		if( Object.keys( userOptions ).length !== 0 ) {
-			userOptions = userOptions[ 'userOptions' ];
-			canUse = userOptions ['ShowValues'];
-		}
-
-		$( "a[href*='Scoring']" ).each( function() {
-			value = $( this ).attr( 'title' );
-			value = value.substr( 0, value.lastIndexOf( "/" ) );
-			$( this ).after( getObjPill( value, 4 ) );
-		} );
-
-		if( !canUse )
-			return;
+	$( "a[href*='Scoring']" ).each( function() {
+		var tmpValue = $( this ).attr( 'title' );
+		tmpValue = tmpValue.substr( 0, tmpValue.lastIndexOf( "/" ) );
+		$( this ).after( globalGetPill( tmpValue, 4 ) );
 	} );
+
 }

@@ -1,344 +1,350 @@
 /* https://docs.google.com/spreadsheets/d/1VVSkOKaQvaZD2eykfdkS-pCL_2ilxpGCblB9holPUBk/pubhtml?gid=10&single=true */
 
-/* High color scheme */
-.level-26--high {
+/* High color scheme *********************************************************/
+.high--level-26{
 	/* god smackingly glorious*/
 	background-color: #ff8000;
 	color: #000000;
 }
 
-.level-25--high {
+.high--level-25{
 	/* god smacking*/
 	background-color: #ffb500; 
 	color: #000000;
 }
 
-.level-24--high {
+.high--level-24{
 	/* earth shaking*/
 	background-color: #ffeb00; 
 	color: #000000;
 }
 
-.level-23--high {
+.high--level-23{
 	/* mind melting*/
 	background-color: #ddff00; 
 	color: #000000;
 }
 
-.level-22--high {
+.high--level-22{
 	/* revolutionary*/
 	background-color: #a7ff00; 
 	color: #000000;
 }
 
-.level-21--high {
+.high--level-21{
 	/* perfect*/
 	background-color: #71ff00; 
 	color: #000000;
 }
 
-.level-20--high {
+.high--level-20{
 	/* incredible*/
 	background-color: #3bff00; 
 	color: #000000;
 }
 
-.level-19--high {
+.high--level-19{
 	/* wonderful*/
 	background-color: #05ff00; 
 	color: #000000;
 }
 
-.level-18--high {
+.high--level-18{
 	/* terrific*/
 	background-color: #00ff31; 
 	color: #000000;
 }
 
-.level-17--high {
+.high--level-17{
 	/* great*/
 	background-color: #00ff67; 
 	color: #000000;
 }
 
-.level-16--high {
+.high--level-16{
 	/* awesome*/
 	background-color: #00ff9d; 
 	color: #000000;
 }
 
-.level-15--high {
+.high--level-15{
 	/* splendid*/
 	background-color: #00ffd3; 
 	color: #000000;
 }
 
-.level-14--high {
+.high--level-14{
 	/* sweet*/
 	background-color: #00f5ff;
 	color: #000000;
 }
 
-.level-13--high {
+.high--level-13{
 	/* good*/
 	background-color: #00bfff; 
 	color: #ffffff;
 }
 
-.level-12--high {
+.high--level-12{
 	/* pleasant*/
 	background-color: #0089ff; 
 	color: #ffffff;
 }
 
-.level-11--high {
+.high--level-11{
 	/* nice*/
 	background-color: #0053ff; 
 	color: #ffffff;
 }
 
-.level-10--high {
+.high--level-10{
 	/* decent*/
 	background-color: #001dff; 
 	color: #ffffff;
 }
 
-.level-09--high {
+.high--level-09{
 	/* above average*/
 	background-color: #1900ff; 
 	color: #ffffff;
 }
 
-.level-08--high {
+.high--level-08{
 	/* mediocre*/
 	background-color: #4e00ff; 
 	color: #ffffff;
 }
 
-.level-07--high {
+.high--level-07{
 	/* below average*/
 	background-color: #8400ff; 
 	color: #ffffff;
 }
 
-.level-06--high {
+.high--level-06{
 	/* poor*/
 	background-color: #ba00ff; 
 	color: #ffffff;
 }
 
-.level-05--high {
+.high--level-05{
 	/* terrible*/
 	background-color: #f000ff; 
 	color: #ffffff;
 }
 
-.level-04--high {
+.high--level-04{
 	/* dreadful*/
 	background-color: #ff00d8; 
 	color: #ffffff;
 }
 
-.level-03--high {
+.high--level-03{
 	/* horrendous*/
 	background-color: #ff00a2;
 	color: #ffffff;
 }
 
-.level-02--high {
+.high--level-02{
 	/* bottom dwelling*/
 	background-color: #ff006c; 
 	color: #ffffff;
 }
 
-.level-01--high {
+.high--level-01{
 	/* abysmal*/
 	background-color: #ff0036; 
 	color: #ffffff;
 }
 
-.level-00--high {
+.high--level-00{
 	/* truly abysmal*/
 	background-color: #ff0000; 
 	color: #ffffff;
 }
 
-.level-none--high {
+.high--level-none{
 	/* truly abysmal*/
 	background-color: #ffffff; 
 	color: #000000;
 }
 
-.level-none--high {
+.high--level-money{
 	/* truly abysmal*/
 	background-color: #b1cca9; 
 	color: darkgreen;
 }
 
-/* Pastel color scheme */
-.level-26--pastel {
+/* Pastel color scheme *******************************************************/
+.pastel--level-26{
 	/* god smackingly glorious*/
 	background-color: #8A880F;
 	color: #000000;
 }
 
-.level-25--pastel {
+.pastel--level-25{
 	/* god smacking*/
 	background-color: #A9A720; 
 	color: #000000;
 }
 
-.level-24--pastel {
+.pastel--level-24{
 	/* earth shaking*/
 	background-color: #C9C632; 
 	color: #000000;
 }
 
-.level-23--pastel {
+.pastel--level-23{
 	/* mind melting*/
 	background-color: #E9E644; 
 	color: #000000;
 }
 
-.level-22--pastel {
+.pastel--level-22{
 	/* revolutionary*/
 	background-color: #C7DD59; 
 	color: #000000;
 }
 
-.level-21--pastel {
+.pastel--level-21{
 	/* perfect*/
 	background-color: #A5D56E; 
 	color: #000000;
 }
 
-.level-20--pastel {
+.pastel--level-20{
 	/* incredible*/
 	background-color: #84CD84; 
 	color: #000000;
 }
 
-.level-19--pastel {
+.pastel--level-19{
 	/* wonderful*/
 	background-color: #7DD095; 
 	color: #000000;
 }
 
-.level-18--pastel {
+.pastel--level-18{
 	/* terrific*/
 	background-color: #77D3A7; 
 	color: #000000;
 }
 
-.level-17--pastel {
+.pastel--level-17{
 	/* great*/
 	background-color: #71D6B8; 
 	color: #000000;
 }
 
-.level-16--pastel {
+.pastel--level-16{
 	/* awesome*/
 	background-color: #6BD9CA; 
 	color: #000000;
 }
 
-.level-15--pastel {
+.pastel--level-15{
 	/* splendid*/
 	background-color: #65DCDC; 
 	color: #000000;
 }
 
-.level-14--pastel {
+.pastel--level-14{
 	/* sweet*/
 	background-color: #65C4DC;
 	color: #000000;
 }
 
-.level-13--pastel {
+.pastel--level-13{
 	/* good*/
 	background-color: #65ACDC; 
 	color: #ffffff;
 }
 
-.level-12--pastel {
+.pastel--level-12{
 	/* pleasant*/
 	background-color: #6595DC; 
 	color: #ffffff;
 }
 
-.level-11--pastel {
+.pastel--level-11{
 	/* nice*/
 	background-color: #657DDC; 
 	color: #ffffff;
 }
 
-.level-10--pastel {
+.pastel--level-10{
 	/* decent*/
 	background-color: #6566DC; 
 	color: #ffffff;
 }
 
-.level-09--pastel {
+.pastel--level-09{
 	/* above average*/
 	background-color: #7C65D7; 
 	color: #ffffff;
 }
 
-.level-08--pastel {
+.pastel--level-08{
 	/* mediocre*/
 	background-color: #9465D2; 
 	color: #ffffff;
 }
 
-.level-07--pastel {
+.pastel--level-07{
 	/* below average*/
 	background-color: #AC65CD; 
 	color: #ffffff;
 }
 
-.level-06--pastel {
+.pastel--level-06{
 	/* poor*/
 	background-color: #C465C8; 
 	color: #ffffff;
 }
 
-.level-05--pastel {
+.pastel--level-05{
 	/* terrible*/
 	background-color: #DC65C4; 
 	color: #ffffff;
 }
 
-.level-04--pastel {
+.pastel--level-04{
 	/* dreadful*/
 	background-color: #E060B0; 
 	color: #ffffff;
 }
 
-.level-03--pastel {
+.pastel--level-03{
 	/* horrendous*/
 	background-color: #E45C9D;
 	color: #ffffff;
 }
 
-.level-02--pastel {
+.pastel--level-02{
 	/* bottom dwelling*/
 	background-color: #E95889; 
 	color: #ffffff;
 }
 
-.level-01--pastel {
+.pastel--level-01{
 	/* abysmal*/
 	background-color: #ED5476; 
 	color: #ffffff;
 }
 
-.level-00--pastel {
+.pastel--level-00{
 	/* truly abysmal*/
 	background-color: #F25063; 
 	color: #ffffff;
 }
 
-.level-none--pastel {
+.pastel--level-none{
+	/* truly abysmal*/
+	background-color: #ffffff; 
+	color: #000000;
+}
+
+.pastel--level-money{
 	/* truly abysmal*/
 	background-color: #b1cca9; 
 	color: darkgreen;
