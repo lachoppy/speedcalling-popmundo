@@ -56,7 +56,6 @@ function optionsSave( ) {
 	userOptions.option_TicketPrice_enabled = document.getElementById( 'option_TicketPrice_enabled' ).checked;
 	userOptions.option_TicketPrice_useHighColors = document.getElementById( 'option_TicketPrice_useHighColors' ).checked;
 	userOptions.option_TicketPrice_useHigherPrices = document.getElementById( 'option_TicketPrice_useHigherPrices' ).checked;
-	alert( JSON.stringify(userOptions));
 	chromeStorage.set( userOptions, function( ) {
 		console.log( "SpeedCalling Options Data synched to chromeStorage!" );
 	} );

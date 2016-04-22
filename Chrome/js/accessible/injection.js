@@ -32,12 +32,10 @@ function inpageCallEveryone( mainId ) {
 //Updates the localStorage with the new values
 function inpageStoreCharacterOption( defaultOptionValue,  mainStorageId, currentCharId, selectId ) {
 	
-	//Gets the value of the select with the cbbId or return the default option value
-	( typeof document.getElementById( selectId ) !== 'undefined' )? document.getElementById( selectId ).value: defaultOptionValue;
-
 	//Stores the value on the localStorage
 	storedValues = JSON.parse( window.localStorage.getItem( mainStorageId ) );
-	storedValues[currentCharId] = tmpValue;
+	//Gets the value of the select with the cbbId or return the default option value
+	storedValues[currentCharId] = ( typeof document.getElementById( selectId ) !== 'undefined' )? document.getElementById( selectId ).value: defaultOptionValue;
 	window.localStorage.setItem( mainStorageId, JSON.stringify( storedValues ) );
 	/*@TODO: Add option to sync these values*/
 }

@@ -107,8 +107,8 @@ function classPossibleCallOptions() {
 	this.options = 9;
 
 	//Returns an array with all the options
-	this.getOptionS = function(){
-		return [ 121, 24, 25, 26, 58, 61, 73, 74, 999 ];
+	this.getOptions = function(){
+		return [ 121, 24, 25, 26, 58, 61, 73, 74, 9999 ];
 	}
 
 	//Returns the default value based on the localStorage

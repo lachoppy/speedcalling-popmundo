@@ -17,5 +17,5 @@ function lang_en() {
 	this.SP_74						= "Flirty SMS";
 	this.SP_9999					= "Dont Call";
 	this.SP_CallButton				= "Call everyone";
-	this.SP_ReportBugs				= "Joe Cloudwalker's SpeedCalling for Popmundo";
+	this.SP_ReportBugs				= "     Joe Cloudwalker's SpeedCalling for Popmundo";
 }

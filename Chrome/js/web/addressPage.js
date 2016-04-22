@@ -13,7 +13,7 @@ function execAddressPage() {
 	//Calls current char if activated
 	var tmpAction = 9999;
 	$( "select[id='ctl00_cphTopColumn_ctl00_ddlInteractionTypes']" ).each( function() {
-		myCharacterOptions_RunTime = JSON.parse( window.localStorage.getItem( getCookie( 'scMainStorageId' ) ) );
+		myCharacterOptions_RunTime = JSON.parse( window.localStorage.getItem( globalGetCookie( 'scMainStorageId' ) ) );
 		tmpAction = myCharacterOptions_RunTime[$( '.idHolder' ).eq( 1 ).html()];
 	} );
 

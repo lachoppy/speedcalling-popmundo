@@ -34,12 +34,12 @@ function execAddressBook() {
 	myTR.className = 'even';
 
 	var myTD = document.createElement( "td" );
-	myTD.colspan = 8;
+	myTD.setAttribute( 'colspan', '4' );
 
 	var myButton = document.createElement( "input" );
 	myButton.type = 'button';
 	myButton.value = words.get( 'SP_CallButton' );
-	myButton.onclick = "inpageCallEveryone('" + getCookie( 'scMainStorageId' ) + "');";
+	myButton.setAttribute( "onclick", "inpageCallEveryone('" + globalGetCookie( 'scMainStorageId' ) + "');" );
 	myTD.appendChild( myButton );
 
 	var myLink = document.createElement( "a" );
@@ -57,7 +57,7 @@ function execAddressBook() {
 		myCharacterIDs.push( splitUrl[ splitUrl.length - 1 ] );
 	} );
 
-	//TO REMOVE var locMainStorageID = getCookie( 'scMainStorageId' );
+	//TO REMOVE var locMainStorageID = globalGetCookie( 'scMainStorageId' );
 
 	//Loads default call action value for each contact (existant in the links)
 	for( i = 0; i < myCharacterIDs.length; i++ ) {
@@ -65,11 +65,11 @@ function execAddressBook() {
 	}
 
 	//Updates the localStorage if not present
-	if( window.localStorage.getItem( getCookie( 'scMainStorageId' ) ) === null ) {
-		window.localStorage.setItem( getCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
+	if( window.localStorage.getItem( globalGetCookie( 'scMainStorageId' ) ) === null ) {
+		window.localStorage.setItem( globalGetCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
 		myCharacterOptions_Storage = myCharacterOptions_RunTime;
 	} else {
-		myCharacterOptions_Storage = JSON.parse( window.localStorage.getItem( getCookie( 'scMainStorageId' ) ) );
+		myCharacterOptions_Storage = JSON.parse( window.localStorage.getItem( globalGetCookie( 'scMainStorageId' ) ) );
 	}
 
 	//Loads stored values into runtime values
@@ -80,7 +80,7 @@ function execAddressBook() {
 	}
 
 	//Saves the localStorage
-	window.localStorage.setItem( getCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
+	window.localStorage.setItem( globalGetCookie( 'scMainStorageId' ), JSON.stringify( myCharacterOptions_RunTime ) );
 
 	//Loops trhough all the contacts and change their links
 	$( "a[id^='ctl00_cphLeftColumn_ctl00_repAddressBook_ctl'][id$=_lnkCharacter]" ).each( function() {
@@ -89,26 +89,26 @@ function execAddressBook() {
 		var splitUrl = $( this ).attr( 'href' ).split( '/' );
 		var currentCharID = splitUrl[ splitUrl.length - 1 ];
 
-		$( this ).attr( 'href', myCallOptions.callURI + currentCharID + myCallOptions.callToken + getCookie( 'scMainCharID' ) );
+		$( this ).attr( 'href', myCallOptions.callURI + currentCharID + myCallOptions.callToken + globalGetCookie( 'scMainCharID' ) );
 		$( this ).attr( 'target', '_BLANK' );
 
 		//Creates the select objects
 		var mySelect = document.createElement( "select" );
-		mySelect.id = getCookie( 'scMainStorageId' ) + '_ContId_' + currentCharID;
+		mySelect.id = globalGetCookie( 'scMainStorageId' ) + '_ContId_' + currentCharID;
 		mySelect.name = mySelect.id;
 		mySelect.className = "callEveryone";
-		mySelect.onchange = "inpageStoreCharacterOption('" + myCallOptions.default() + "', '" + getCookie( 'scMainStorageId' ) + "', '" + currentCharID + "', '" + mySelect.id + "')";
+		mySelect.setAttribute( 'onchange', "inpageStoreCharacterOption('" + myCallOptions.default() + "', '" + globalGetCookie( 'scMainStorageId' ) + "', '" + currentCharID + "', '" + mySelect.id + "')" );
 
 		// Goes trough all possible values and creates the options
-		for( var i = 0; i < myCallOptions.options - 1; i++ ) {
+		for( var i = 0; i < myCallOptions.options; i++ ) {
 			//Create the option object
 			var myOption = document.createElement( "option" );
-			myOption.value = myCallOptions.charOptions[i];
-			myOption.textContent = words.get( 'SP_' + myCallOptions.getOptions()[i] );
+			myOption.value = myCallOptions.getOptions()[i];
+			myOption.textContent = words.get( 'SP_' + myCallOptions.getOptions()[ i ] );
 
 			//Selects if it's the chosen option by the charId
-			if( myCharacterOptions_RunTime[currentCharID] === myCallOptions.options[i] ) {
-				myOption.selected = true;
+			if( parseInt( myCharacterOptions_RunTime[currentCharID] ) === parseInt( myCallOptions.getOptions()[i] ) ) {
+				myOption.setAttribute( 'selected', 'selected' );
 			}
 
 			mySelect.appendChild( myOption );

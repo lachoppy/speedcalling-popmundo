@@ -184,7 +184,7 @@ function globalOptionsDefaultValues() {
 		option_TicketPrice_useHigherPrices: false,
 		option_Language: 'en',
 		option_numberOfCities: 49
-	}
+	};
 }
 
 //Loads values and pass to the coontrols
