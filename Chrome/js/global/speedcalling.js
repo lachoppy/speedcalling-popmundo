@@ -14,21 +14,23 @@ function globalCanRender( regex, options ) {
 	//Return true if one of the regexes match the URL
 	for( var i = 0; i < regex.length; i++ ) {
 		if( window.location.href.match( regex[i] ) ) {
-			return true;
+
+			//If no options, return true
+			if( options === null || options === undefined || options[0] == '' ) {
+				return true;
+			} else {
+
+				//If one of the options is negative, return false
+				for( var i = 0; i < options.length; i++ ) {
+					if( Boolean( globalLocalStorageGet( options[i] ) ) ) {
+						return true;
+					}
+				}
+
+			}
 		}
 	}
 
-	//If no options, return true
-	if( options === null || options === undefined ) {
-		return true;
-	}
-
-	//If one of the options is negative, return false
-	for( var i = 0; i < options.length; i++ ) {
-		if( !globalLocalStorageGet( options[i] ) ) {
-			return false;
-		}
-	}
 
 	//Finally
 	return false;

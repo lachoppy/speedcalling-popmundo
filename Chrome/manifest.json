@@ -4,7 +4,7 @@
 	"short_name": "SpeedCalling for Popmundo",
 	"description": "Call all your Popmundo friends with a single mouse click.",
 	"author": "Joe Couldwalker ( http://popmundo.com/World/Popmundo.aspx/Character/3248185)",
-	"version": "0.6",
+	"version": "0.7",
 	"default_locale": "en",
 	"options_page": "options.html",
 	"browser_action": {

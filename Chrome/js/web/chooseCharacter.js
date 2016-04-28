@@ -1,3 +1,3 @@
-if( globalCanRender( [ "\/World\/Popmundo.aspx\/ChooseCharacter" ] ) ) {
+if( globalCanRender( [ "\/World\/Popmundo.aspx\/ChooseCharacter" ], [''] ) ) {
 	globalOptionsLoadToLocalStorage();
 }
